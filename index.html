@@ -16,8 +16,8 @@
   <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.development.js" crossorigin></script>
   <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7/babel.min.js"></script>
 </head>
-<body>
-  <div id="root" class="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-300"></div>
+<body class="flex flex-col min-h-screen">
+  <div id="root" class="flex-1 bg-gray-100"></div>
 
   <script type="text/babel">
     // Helper Functions
@@ -54,13 +54,13 @@
 
     // Skeleton Loader Component
     const SkeletonTablet = () => (
-      <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md m-2 flex flex-col md:flex-row items-start animate-pulse">
-        <div className="w-full md:w-32 md:h-20 bg-gray-300 dark:bg-gray-700 rounded-md"></div>
+      <div className="p-4 bg-white rounded-lg shadow-md m-2 flex flex-col md:flex-row items-start animate-pulse">
+        <div className="w-full md:w-32 md:h-20 bg-gray-300 rounded-md"></div>
         <div className="mt-2 md:mt-0 md:ml-4 flex-1">
-          <div className="h-5 bg-gray-300 dark:bg-gray-700 rounded w-3/4 mb-2"></div>
-          <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-1/2 mb-1"></div>
-          <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-2/3 mb-2"></div>
-          <div className="h-6 bg-gray-300 dark:bg-gray-700 rounded w-20"></div>
+          <div className="h-5 bg-gray-300 rounded w-3/4 mb-2"></div>
+          <div className="h-4 bg-gray-300 rounded w-1/2 mb-1"></div>
+          <div className="h-4 bg-gray-300 rounded w-2/3 mb-2"></div>
+          <div className="h-6 bg-gray-300 rounded w-20"></div>
         </div>
       </div>
     );
@@ -76,7 +76,7 @@
       };
 
       return (
-        <div className="p-4 bg-white dark:bg-gray-800 shadow-md">
+        <div className="p-4 bg-white shadow-md">
           <div className="flex items-center space-x-2">
             <input
               type="text"
@@ -84,13 +84,13 @@
               onChange={(e) => setQuery(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
               placeholder="Search for videos"
-              className="flex-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600"
+              className="flex-1 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               aria-label="Search for YouTube videos"
             />
             <div className="relative group">
               <button
                 onClick={() => handleSearch()}
-                className="bg-black dark:bg-gray-600 text-white p-2 rounded-full hover:bg-gray-800 dark:hover:bg-gray-500 active:scale-95 transition duration-200 flex items-center justify-center w-12 h-12"
+                className="bg-black text-white p-2 rounded-full hover:bg-gray-800 active:scale-95 transition duration-200 flex items-center justify-center w-12 h-12"
                 aria-label="Search"
               >
                 <i className="fas fa-search"></i>
@@ -100,7 +100,7 @@
           </div>
           {searchHistory.length > 0 && (
             <div className="mt-2 flex flex-wrap items-center gap-2">
-              <span className="text-sm text-gray-500 dark:text-gray-400">Recent Searches:</span>
+              <span className="text-sm text-gray-500">Recent Searches:</span>
               {searchHistory.map((item, index) => (
                 <button
                   key={index}
@@ -108,7 +108,7 @@
                     setQuery(item);
                     handleSearch(item);
                   }}
-                  className="text-sm bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600"
+                  className="text-sm bg-gray-200 text-gray-800 px-3 py-1 rounded-full hover:bg-gray-300"
                   aria-label={`Search for ${item}`}
                 >
                   {item}
@@ -131,14 +131,14 @@
     };
 
     // VideoTablet Component
-    const VideoTablet = ({ title, channel, duration, views, likes, uploaded, thumbnail, videoId, onFeedback }) => {
+    const VideoTablet = ({ title, channel, duration, views, likes, uploaded, thumbnail, videoId }) => {
       const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
       const formattedViews = formatNumber(views);
       const formattedLikes = formatNumber(likes);
       const formattedUploaded = formatUploadTime(uploaded);
 
       return (
-        <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md m-2 flex flex-col md:flex-row items-start border border-transparent transition duration-300 hover:border-gray-300 hover:scale-102">
+        <div className="p-4 bg-white rounded-lg shadow-md m-2 flex flex-col md:flex-row items-start border border-transparent transition duration-300 hover:border-gray-300 hover:scale-102">
           <a href={videoUrl} target="_blank" rel="noopener noreferrer" className="relative" aria-label={`Watch ${title}`}>
             <img
               src={thumbnail}
@@ -150,36 +150,19 @@
             </span>
           </a>
           <div className="mt-2 md:mt-0 md:ml-4 flex-1">
-            <h3 className="text-base md:text-lg font-semibold text-gray-900 dark:text-gray-100">{title}</h3>
-            <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400">{channel} • {duration}</p>
-            <p className="text-xs md:text-sm text-gray-500 dark:text-gray-500">{formattedViews} views • {formattedLikes} likes • {formattedUploaded}</p>
-            <div className="mt-2 flex items-center space-x-2">
+            <h3 className="text-base md:text-lg font-semibold text-gray-900">{title}</h3>
+            <p className="text-xs md:text-sm text-gray-600">{channel} • {duration}</p>
+            <p className="text-xs md:text-sm text-gray-500">{formattedViews} views • {formattedLikes} likes • {formattedUploaded}</p>
+            <div className="mt-2">
               <a
                 href={videoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-4 py-1 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 active:scale-95 transition duration-200"
+                className="inline-block bg-gray-200 text-gray-800 px-4 py-1 rounded-full hover:bg-gray-300 active:scale-95 transition duration-200"
                 aria-label={`Watch ${title} on YouTube`}
               >
                 Watch Now
               </a>
-              <div className="flex items-center space-x-1">
-                <span className="text-xs text-gray-500 dark:text-gray-400">Was this helpful?</span>
-                <button
-                  onClick={() => onFeedback(videoId, true)}
-                  className="text-green-500 hover:text-green-600"
-                  aria-label="Mark as helpful"
-                >
-                  Yes
-                </button>
-                <button
-                  onClick={() => onFeedback(videoId, false)}
-                  className="text-red-500 hover:text-red-600"
-                  aria-label="Mark as not helpful"
-                >
-                  No
-                </button>
-              </div>
             </div>
           </div>
         </div>
@@ -200,19 +183,6 @@
         JSON.parse(localStorage.getItem('searchHistory')) || []
       );
       const [lastQuery, setLastQuery] = React.useState('');
-      const [darkMode, setDarkMode] = React.useState(
-        localStorage.getItem('darkMode') === 'true'
-      );
-      const [feedback, setFeedback] = React.useState({});
-
-      React.useEffect(() => {
-        if (darkMode) {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-        }
-        localStorage.setItem('darkMode', darkMode);
-      }, [darkMode]);
 
       React.useEffect(() => {
         localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
@@ -227,12 +197,6 @@
       const clearHistory = () => {
         setSearchHistory([]);
         localStorage.removeItem('searchHistory');
-      };
-
-      const handleFeedback = (videoId, isHelpful) => {
-        setFeedback(prev => ({ ...prev, [videoId]: isHelpful }));
-        // In a full app, you'd send this feedback to a server
-        console.log(`Feedback for video ${videoId}: ${isHelpful ? 'Helpful' : 'Not Helpful'}`);
       };
 
       const fetchWithKey = async (url, keyIndex) => {
@@ -311,7 +275,7 @@
 
             const formattedDuration = duration.replace('PT', '').toLowerCase().replace('h', 'h ').replace('m', 'm ').replace('s', 's');
             const uploaded = new Date(item.snippet.publishedAt);
-            const now = new Date('2025-05-28T08:49:00Z'); // Current date (May 28, 2025, 02:19 PM IST = 08:49 AM UTC)
+            const now = new Date('2025-05-28T17:44:00Z'); // Current date (May 28, 2025, 11:14 PM IST = 05:44 PM UTC)
             const diffDays = Math.floor((now - uploaded) / (1000 * 60 * 60 * 24));
             const uploadedText = diffDays < 1 ? 'today' : diffDays === 1 ? '1 day ago' : `${diffDays} days ago`;
 
@@ -390,22 +354,8 @@
       };
 
       return (
-        <div className="container mx-auto p-4">
-          <div className="flex justify-between items-center mb-6">
-            <h1 className="text-2xl md:text-3xl font-bold text-center text-gray-900 dark:text-gray-100">YouTube Video Recommender</h1>
-            <div className="relative group">
-              <button
-                onClick={() => setDarkMode(!darkMode)}
-                className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
-                aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-              >
-                <i className={darkMode ? "fas fa-sun" : "fas fa-moon"}></i>
-              </button>
-              <span className="absolute bottom-full mb-2 hidden group-hover:block text-sm bg-gray-800 text-white px-2 py-1 rounded">
-                {darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-              </span>
-            </div>
-          </div>
+        <div className="container mx-auto p-4 flex flex-col min-h-[calc(100vh-4rem)]">
+          <h1 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-6">YouTube Video Recommender</h1>
           <SearchBar
             onSearch={handleSearch}
             searchHistory={searchHistory}
@@ -414,20 +364,20 @@
           <div className="mt-4 flex justify-center space-x-4">
             <button
               onClick={() => handleTabChange('videos')}
-              className={`px-4 py-2 rounded-full ${tab === 'videos' ? 'bg-gray-800 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600'}`}
+              className={`px-4 py-2 rounded-full ${tab === 'videos' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'}`}
               aria-label="View videos"
             >
               Videos
             </button>
             <button
               onClick={() => handleTabChange('shorts')}
-              className={`px-4 py-2 rounded-full ${tab === 'shorts' ? 'bg-gray-800 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600'}`}
+              className={`px-4 py-2 rounded-full ${tab === 'shorts' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'}`}
               aria-label="View shorts"
             >
               Shorts
             </button>
           </div>
-          <div className="mt-6">
+          <div className="mt-6 flex-1">
             {loading ? (
               <div>
                 {[...Array(5)].map((_, index) => (
@@ -439,14 +389,14 @@
                 <p>{error}</p>
                 <button
                   onClick={() => fetchVideosData(lastQuery, tab === 'shorts')}
-                  className="mt-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-4 py-1 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 active:scale-95 transition duration-200"
+                  className="mt-2 bg-gray-200 text-gray-800 px-4 py-1 rounded-full hover:bg-gray-300 active:scale-95 transition duration-200"
                   aria-label="Retry search"
                 >
                   Retry
                 </button>
               </div>
             ) : (tab === 'videos' ? displayedVideos : displayedShorts).length === 0 ? (
-              <p className="text-center text-gray-500 dark:text-gray-400">
+              <p className="text-center text-gray-500">
                 {tab === 'videos' ? 'Search for videos to see recommendations!' : 'No shorts found for this query.'}
               </p>
             ) : (
@@ -461,7 +411,6 @@
                   uploaded={video.uploaded}
                   thumbnail={video.thumbnail}
                   videoId={video.videoId}
-                  onFeedback={handleFeedback}
                 />
               ))
             )}
@@ -471,7 +420,7 @@
               <div className="relative group">
                 <button
                   onClick={loadMore}
-                  className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-6 py-2 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 active:scale-95 transition duration-200"
+                  className="bg-gray-200 text-gray-800 px-6 py-2 rounded-full hover:bg-gray-300 active:scale-95 transition duration-200"
                   aria-label="Load more videos"
                 >
                   Load More
@@ -482,7 +431,7 @@
               </div>
             </div>
           )}
-          <footer className="mt-8 text-center text-gray-500 dark:text-gray-400 text-sm">
+          <footer className="mt-8 text-center text-gray-500 text-sm">
             <p>Questions or feedback? Email us at <a href="mailto:peaceofmindx17@gmail.com" className="text-blue-500 hover:underline">peaceofmindx17@gmail.com</a></p>
           </footer>
         </div>
