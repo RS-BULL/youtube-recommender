@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
   const { endpoint, query, videoIds, key } = req.query;
   const API_KEY = process.env.YOUTUBE_API_KEY; // Set in Vercel dashboard
-  const SECRET_KEY = 'Vladivostock786'; // Replace with your own secret key
+  const SECRET_KEY = 'Vladivostock786';
 
   // Validate the secret key to prevent unauthorized access
   if (key !== SECRET_KEY) {

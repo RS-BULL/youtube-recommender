@@ -7,7 +7,7 @@
   <meta property="og:title" content="YouTube Video Recommender">
   <meta property="og:description" content="Discover quality YouTube videos tailored to your search with our intelligent ranking system.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://youtube-recommender.surge.sh">
+  <meta property="og:url" content="https://youtube-recommender.vercel.app">
   <title>YouTube Video Recommender</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='red'%3E%3Cpath d='M23.5 6.5a4.3 4.3 0 0 0-3-3C18.8 3 12 3 12 3s-6.8 0-8.5.5a4.3 4.3 0 0 0-3 3C0 8.2 0 12 0 12s0 3.8.5 5.5a4.3 4.3 0 0 0 3 3c1.7.5 8.5.5 8.5.5s6.8 0 8.5-.5a4.3 4.3 0 0 0 3-3C24 15.8 24 12 12 12s0-3.8-.5-5.5zM9.8 15.8V8.2l5.7 3.8-5.7 3.8z'/%3E%3C/svg%3E">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -236,8 +236,8 @@
       };
 
       const fetchWithKey = async (url, keyIndex) => {
-        const VERCEL_API_URL = 'https://youtube-recommender-flame.vercel.app/api/youtube'; // Replace with your Vercel API URL
-        const SECRET_KEY = 'Vladivostock786'; // Replace with your secret key
+        const VERCEL_API_URL = 'https://youtube-recommender-flame.vercel.app/api/youtube';
+        const SECRET_KEY = 'Vladivostock786';
         const response = await fetch(`${VERCEL_API_URL}?${url}&key=${SECRET_KEY}`);
         const data = await response.json();
         if (!response.ok) {
@@ -311,7 +311,7 @@
 
             const formattedDuration = duration.replace('PT', '').toLowerCase().replace('h', 'h ').replace('m', 'm ').replace('s', 's');
             const uploaded = new Date(item.snippet.publishedAt);
-            const now = new Date('2025-05-28T07:22:00Z'); // Current date (May 28, 2025, 12:52 PM IST = 07:22 AM UTC)
+            const now = new Date('2025-05-28T08:49:00Z'); // Current date (May 28, 2025, 02:19 PM IST = 08:49 AM UTC)
             const diffDays = Math.floor((now - uploaded) / (1000 * 60 * 60 * 24));
             const uploadedText = diffDays < 1 ? 'today' : diffDays === 1 ? '1 day ago' : `${diffDays} days ago`;
 
